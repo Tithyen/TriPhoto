@@ -2,9 +2,9 @@ package tri;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.TimeZone;
+import java.util.prefs.Preferences;
 
 import com.drew.imaging.ImageMetadataReader;
 import com.drew.imaging.ImageProcessingException;
@@ -30,6 +30,7 @@ public class Fichier extends File {
 	private String dateCreation;
 	private String nouveauNom;
 	private long taille;
+	private static Preferences pref = Preferences.userRoot();
 	
 	/**
 	 * constructeur
@@ -108,15 +109,16 @@ public class Fichier extends File {
 	}
 	
 	private void setTypeFichier() {
-		this.extension = this.getPath().substring(this.getPath().lastIndexOf(".")).toLowerCase();
-
-		if (Arrays.toString(TypeFichier.PHOTO.getExtensionOk()).contains(extension)) {
+		this.extension = this.getPath().substring(this.getPath().lastIndexOf("."))
+				.toLowerCase();
+		String extensionSansPoint = this.extension.replace(".", "");
+		if (pref.get("extension." + TypeFichier.PHOTO.name(), null).contains(extensionSansPoint)) {
 			if (this.dateCreation == "") {
 				this.typeFichier = TypeFichier.PHOTO_SANS_EXIF;
 			} else {
 				this.typeFichier = TypeFichier.PHOTO;
 			}	
-		} else if (Arrays.toString(TypeFichier.VIDEO.getExtensionOk()).contains(extension)) {
+		} else if (pref.get("extension." + TypeFichier.VIDEO, null).contains(extensionSansPoint)) {
 			this.typeFichier = TypeFichier.VIDEO;
 		} else {
 			this.typeFichier = TypeFichier.INCONNU;
@@ -132,4 +134,5 @@ public class Fichier extends File {
 		}
 		this.nouveauNom = s;
 	}
+	
 }

@@ -13,8 +13,6 @@ import java.util.Set;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 
-import enumerations.TypeFichier;
-
 /**
  * Permet de lire les paramètres utilisateurs de l'application ;
  * Ces paramètres sont des objets de la classe Preferences enregistrées à la racine
@@ -92,6 +90,20 @@ public class Parametres {
 		}
 		return listeProblemes;
 	}
+	
+	public void affiche() {
+		String[] cles;
+		try {
+			cles = pref.keys();
+			for (String cle : cles) {
+				// Test si la valeur associée à la cle est vide
+				System.out.println(cle + " / " + getValeur(cle));
+				}
+		} catch (BackingStoreException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+	}
 		
 	
 	private void getParametresFromFichier() {		
@@ -115,10 +127,6 @@ public class Parametres {
 			System.out.println("Programme stoppé");
 			System.exit(0);
 		}
-		
-		//on définit les extensions de l'énumération TypeFichier si elles
-		//on été définies dans les paramètres
-		typeFichierExtension();
 	}
 	
 	private void sauvPreferencesFromProperties() {
@@ -160,22 +168,6 @@ public class Parametres {
 		}	
 		return valeur;
 	}
-	
-	private void typeFichierExtension() {
-		for (TypeFichier tf : TypeFichier.values()) {
-			String s = "extension." + tf.name();
-     		if (pref.get(s, null) != null) {
-     			String ss = pref.get(s, null);
-     			String[] ls = ss.split(",");
-     			for (int i = 0; i < ls.length; i++) {
-     				if (!ls[i].startsWith(".")) {
-     					ls[i] = "." + ls[i].replace(" ","");
-     				}
-     			}
-     			tf.setExtensionOk(ls);
-     		}
-     	}
-	}
-	
+		
 	
 }
