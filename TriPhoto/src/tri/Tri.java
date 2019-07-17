@@ -48,9 +48,9 @@ public class Tri {
 						+ "/" + fichierSource.getNouveauNom());
 				break;
 			case PHOTO:
-				fichierCible = new File( fichierSource.getCheminRacine() 
+				fichierCible = new File(fichierSource.getCheminRacine() 
 						+ fichierSource.getDateCreation().substring(0,4) + "/"
-						+ fichierSource.getDateCreation().substring(5,7)
+						+ fichierSource.getDateCreation().substring(4,6)
 						+ "/" + fichierSource.getNouveauNom());
 				break;
 			}		

@@ -1,9 +1,15 @@
 package tri;
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
+import java.util.TimeZone;
 
-import org.apache.commons.imaging.ImageReadException;
+import com.drew.imaging.ImageMetadataReader;
+import com.drew.imaging.ImageProcessingException;
+import com.drew.metadata.Metadata;
+import com.drew.metadata.exif.ExifSubIFDDirectory;
 
 import enumerations.TypeFichier;
 
@@ -70,15 +76,35 @@ public class Fichier extends File {
 		return this.taille;
 	}
 	
+	/*
+	 * extrait depuis les exif (grace au package metadat extractor)
+	 * la date de la photo et la sauve dans la variable de classe dateCreation
+	 * au format yyyMMdd_HHmmss
+	 * Si exif inexistant, renvoie date null
+	 */
 	private void setDateCreation() {
 		try {
-			//on supprime les "'" de la chaine renvoyée par Metadata
-			this.dateCreation = Metadata.RenvoiDateToString(this).replace("'", ""); 
-		} catch (ImageReadException | IOException e) {
+			this.dateCreation="";
+			Metadata metadata = ImageMetadataReader.readMetadata(this);
+			// obtain the Exif directory
+			ExifSubIFDDirectory directory
+			    = metadata.getFirstDirectoryOfType(ExifSubIFDDirectory.class);
+			// query the tag's value
+			if (directory!=null) {
+				Date date
+			    = directory.getDate(ExifSubIFDDirectory.TAG_DATETIME_ORIGINAL);
+				//formatage de la date
+				//on passe de l'heure CEST renvoyée par metadata en heure GMT
+				SimpleDateFormat formater = null;
+				formater = new SimpleDateFormat("yyyyMMdd_HHmmss");
+				formater.setTimeZone(TimeZone.getTimeZone("GMT"));
+				this.dateCreation=formater.format(date);
+			}		
+		} catch (IOException | ImageProcessingException e) {
 			// Si on ne peut pas lire l'exif
 			e.printStackTrace();
-			this.dateCreation="";
 		}
+
 	}
 	
 	private void setTypeFichier() {
@@ -100,17 +126,7 @@ public class Fichier extends File {
 	private void setNouveauNom() {
 		String s="";
 		if (this.dateCreation != "") {
-			String[] sp = this.dateCreation.split(" ");
-			String[] date = sp[0].split(":");
-			String[] time = sp[1].split(":");
-			for (int i = 0; i < date.length; i++) {
-				s += date[i];				
-			}
-			s += "_";
-			for (int i = 0; i < time.length; i++) {
-				s += time[i];
-			}
-			s += this.extension;
+			s = this.dateCreation + this.extension;
 		} else {
 			s = this.getName();
 		}
