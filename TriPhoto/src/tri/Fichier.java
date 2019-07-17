@@ -112,13 +112,15 @@ public class Fichier extends File {
 		this.extension = this.getPath().substring(this.getPath().lastIndexOf("."))
 				.toLowerCase();
 		String extensionSansPoint = this.extension.replace(".", "");
-		if (pref.get("extension." + TypeFichier.PHOTO.name(), null).contains(extensionSansPoint)) {
+		if (pref.get("extension." + TypeFichier.PHOTO.name(), null).toLowerCase()
+				.contains(extensionSansPoint)) {
 			if (this.dateCreation == "") {
 				this.typeFichier = TypeFichier.PHOTO_SANS_EXIF;
 			} else {
 				this.typeFichier = TypeFichier.PHOTO;
 			}	
-		} else if (pref.get("extension." + TypeFichier.VIDEO, null).contains(extensionSansPoint)) {
+		} else if (pref.get("extension." + TypeFichier.VIDEO, null).toLowerCase()
+				.contains(extensionSansPoint)) {
 			this.typeFichier = TypeFichier.VIDEO;
 		} else {
 			this.typeFichier = TypeFichier.INCONNU;
