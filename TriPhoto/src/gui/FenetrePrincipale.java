@@ -148,7 +148,7 @@ public class FenetrePrincipale extends JFrame  {
 					//le panel settings avec les erreurs identifiées
 					if (!Parametres.ListerCleErreur().isEmpty()) {
 						//on informe du problème par une boite de dialogue
-					    ImageIcon img = new ImageIcon("images/MenuAccueil.png");
+					   // ImageIcon img = new ImageIcon("images/MenuAccueil.png");
 					    JOptionPane.showMessageDialog(null, "Impossible de poursuivre le tri.\n "
 					    		+ "Des paramètres doivent être complétés avant de poursuivre.",
 					    		"Actions requises de votre part", JOptionPane.WARNING_MESSAGE); 
