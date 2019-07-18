@@ -28,7 +28,7 @@ import javax.swing.JPanel;
 public class Bouton extends JPanel {
 	
 	String legende = ""; //texte affiché sur le bouton
-	String cheminIcone = "";
+	ImageIcon icon ;
 	int largeur = 100, hauteur = 40;
 	Color couleurNotEnabled = Color.DARK_GRAY;
 	Color couleurFond = new Color(71, 116, 176); //violet
@@ -81,10 +81,10 @@ public class Bouton extends JPanel {
 	 * @param argLegende
 	 * @param argCheminIcone
 	 */
-	public Bouton(String argLegende, String argCheminIcone) {
+	public Bouton(String argLegende, ImageIcon pIcon) {
 		super(new GridBagLayout(), true);
 		this.legende = argLegende;
-		this.cheminIcone = argCheminIcone;
+		this.icon = pIcon;
 		this.creerBouton();
 	}	
 	
@@ -93,14 +93,14 @@ public class Bouton extends JPanel {
 	 * une image ; l'image est placée au dessus du texte
 	 * On fixe également la hauteur et la largeur du bouton
 	 * @param argLegende
-	 * @param argCheminIcone
+	 * @param icon
 	 * @param argLargeur
 	 * @param argHauteur
 	 */
-	public Bouton(String argLegende, String argCheminIcone, int argLargeur, int argHauteur) {
+	public Bouton(String argLegende, ImageIcon pIcon, int argLargeur, int argHauteur) {
 		super(new GridBagLayout(), true);
 		this.legende = argLegende;
-		this.cheminIcone = argCheminIcone;
+		this.icon = pIcon;
 		this.largeur = argLargeur;
 		this.hauteur = argHauteur;
 		this.creerBouton();
@@ -175,8 +175,8 @@ public class Bouton extends JPanel {
 		
 		//création d'une icone si un chemin icône est indiqué dans le 
 		//constructeur
-		if (!cheminIcone.isEmpty()) {
-			labelImage = new JLabel(this.createImageIcon(cheminIcone));
+		if (this.icon != null) {
+			labelImage = new JLabel(this.icon);
 		}
 		//on créé un GridBagContrainst
 		GridBagConstraints gbc = new GridBagConstraints();
@@ -186,7 +186,7 @@ public class Bouton extends JPanel {
 		gbc.anchor = GridBagConstraints.CENTER;
 		gbc.gridwidth = GridBagConstraints.REMAINDER;
 		
-		if (!cheminIcone.isEmpty()) {
+		if (this.icon != null) {
 			this.add(labelImage);
 			gbc.gridy = 1;
 			gbc.insets = new Insets(10, 0, 0, 0);
@@ -226,14 +226,5 @@ public class Bouton extends JPanel {
         });	
 	}	
 	
-	private ImageIcon createImageIcon(String argChemin) {
-        java.net.URL imgURL = this.getClass().getResource(argChemin);
-        if (imgURL != null) {
-            return new ImageIcon(imgURL);
-        } else {
-            System.err.println("Couldn't find file: " + argChemin);
-            return null;
-        }
-    }
 	
 }
