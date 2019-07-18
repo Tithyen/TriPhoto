@@ -13,6 +13,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -85,7 +86,9 @@ public class FenetrePrincipale extends JFrame  {
 		String[] menu = {"Tri", "Settings"};
 		List<Bouton> listeBoutonMenu = new ArrayList<Bouton>();
 		for (String s : menu) {
-			Bouton bouton = new Bouton(s, "/images/Menu" + s + ".png", 200, 200);
+			URL urlImage = this.getClass().getResource("/Menu" + s + ".png");
+			ImageIcon icon = new ImageIcon(urlImage);
+			Bouton bouton = new Bouton(s, icon, 200, 200);
 			listeBoutonMenu.add(bouton);
 			bouton.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Couleurs.MENU_BORDURE.getCouleur()));
 			bouton.setCouleurFond(Couleurs.MENU_DEFAUT.getCouleur());
