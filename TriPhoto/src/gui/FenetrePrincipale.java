@@ -26,13 +26,22 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextPane;
+import javax.swing.SwingConstants;
 import javax.swing.SwingWorker;
+import javax.swing.text.MutableAttributeSet;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
+
 import enumerations.Couleurs;
 import enumerations.Texte;
 import tri.Message;
 import tri.Parametres;
 import tri.Log;
 import tri.Process;
+import utils.VersionProjet;
 
 /**
  * Classe définissant la fenêtre principale de l'IHM
@@ -82,7 +91,7 @@ public class FenetrePrincipale extends JFrame  {
 		//panelWest.setBorder(BorderFactory.createMatteBorder(5, 5, 5, 5, Couleurs.PANEL_FONCE.getCouleur()));
 		panelWest.setLayout(new BoxLayout(panelWest, BoxLayout.Y_AXIS ));
 
-		//Création de trois BoutonMenu
+		//Création des BoutonMenu
 		String[] menu = {"Tri", "Settings"};
 		List<Bouton> listeBoutonMenu = new ArrayList<Bouton>();
 		for (String s : menu) {
@@ -101,6 +110,22 @@ public class FenetrePrincipale extends JFrame  {
 			});
 			panelWest.add(bouton);	
 		}
+		
+		//Affichafe de la VERSION
+		//creation du textarea intermediaire
+		JTextArea tampon = new JTextArea();
+		tampon.setBackground(Couleurs.MENU_DEFAUT.getCouleur());
+		panelWest.add(tampon);
+		//creation du textpane version
+		JTextPane jtp = new JTextPane();
+		jtp.setMaximumSize(new Dimension(200, 20));
+		jtp.setBackground(Couleurs.MENU_DEFAUT.getCouleur());
+		jtp.setFont(Texte.VERSION.getFont());
+		jtp.setForeground(Texte.VERSION.getCouleur());
+		
+		VersionProjet version = new VersionProjet();
+		jtp.setText(version.getVersion());
+	    panelWest.add(jtp);
 		
 				
 		////////////////////// PANEL CENTER

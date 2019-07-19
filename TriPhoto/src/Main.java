@@ -7,6 +7,7 @@ import tri.Log;
 import tri.Message;
 import tri.Parametres;
 import utils.DateHeure;
+import utils.VersionProjet;
 
 public class Main {
 	
@@ -30,6 +31,10 @@ public class Main {
 		
 		// on instancie la classe initialisation
 		new Parametres();
+		
+		//essai
+		VersionProjet v = new VersionProjet();
+		System.out.println(v.getVersion());
 		
 		//On instancie la classe Log pour y inscrire une en-tête	
 		log = new Log();
