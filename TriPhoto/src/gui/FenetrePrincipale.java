@@ -124,7 +124,7 @@ public class FenetrePrincipale extends JFrame  {
 		jtp.setForeground(Texte.VERSION.getCouleur());
 		
 		VersionProjet version = new VersionProjet();
-		jtp.setText(version.getVersion());
+		jtp.setText(version.getLastVersionNumber());
 	    panelWest.add(jtp);
 		
 				

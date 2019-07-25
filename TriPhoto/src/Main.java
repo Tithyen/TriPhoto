@@ -32,10 +32,6 @@ public class Main {
 		// on instancie la classe initialisation
 		new Parametres();
 		
-		//essai
-		VersionProjet v = new VersionProjet();
-		System.out.println(v.getVersion());
-		
 		//On instancie la classe Log pour y inscrire une en-tête	
 		log = new Log();
 		log.ajouter("_______________________________________________________\n\n", Message.Level.NORMAL);
