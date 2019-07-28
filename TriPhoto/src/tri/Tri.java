@@ -32,7 +32,6 @@ public class Tri {
 		this.listeFichiers = pListeFichiers;
 		this.repertoireCree = new ArrayList<File>();
 		this.fichierDeplace = new ArrayList<List<String>>();
-		//this.memo = pMemo;
 	}
 
 	public void Trier() throws IOException {
@@ -43,11 +42,11 @@ public class Tri {
 			//On récupère le chemin du dossier dans lequel le fichier doit être placé
 			//en fonction de son extension, donc du TypeFichier
 			switch (fichierSource.getTypeFichier()) {
-			case VIDEO: case PHOTO_SANS_EXIF: case INCONNU:
+			case PHOTO_SANS_EXIF: case VIDEO_SANS_EXIF: case INCONNU:
 				fichierCible = new File(fichierSource.getCheminRacine()
 						+ "/" + fichierSource.getNouveauNom());
 				break;
-			case PHOTO:
+			case PHOTO: case VIDEO:
 				fichierCible = new File(fichierSource.getCheminRacine() 
 						+ fichierSource.getDateCreation().substring(0,4) + "/"
 						+ fichierSource.getDateCreation().substring(4,6)

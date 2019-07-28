@@ -29,6 +29,7 @@ public final class PanelProprietes extends JPanel {
 			{"chemin.PHOTO", "Dossier des Photos"},
 			{"chemin.PHOTO_SANS_EXIF", "Dossier des Photos sans Exif"},
 			{"chemin.VIDEO", "Dossier des Vidéos"},
+			{"chemin.VIDEO_SANS_EXIF", "Dossier des Vidéos sans Exif"},
 			{"chemin.INCONNU", "Dossier des fichiers inconnus"},
 			{"chemin.log", "Dossier du Log"},
 			{"chemin.choix.sousRepertoire", "Indexer les sous-répertoires"},

@@ -7,7 +7,8 @@ public enum Texte {
 	
 	TITRE1(new Font("Arial", Font.PLAIN, 18), Couleurs.PANEL_BLANC.getCouleur()),
 	TITRE2(new Font("Arial", Font.PLAIN, 18), Couleurs.PANEL_FONCE.getCouleur()),
-	TITRE3(new Font("Arial", Font.PLAIN, 18), Color.BLACK);
+	TITRE3(new Font("Arial", Font.PLAIN, 18), Color.BLACK),
+	VERSION(new Font("Arial", Font.PLAIN, 16), Color.WHITE);
 	
 	Font font;
 	Color couleur;

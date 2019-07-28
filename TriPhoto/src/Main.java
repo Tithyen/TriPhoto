@@ -7,6 +7,7 @@ import tri.Log;
 import tri.Message;
 import tri.Parametres;
 import utils.DateHeure;
+import utils.VersionProjet;
 
 public class Main {
 	

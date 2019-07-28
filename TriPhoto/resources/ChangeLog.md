@@ -1,3 +1,11 @@
+[Version 1.6]
+2019_07_28
+
+Changelog:
+- Gestion des Exifs pour les videos de type mp4 et quicktime (mov)
+- Ajout d'un choix de dossier destination pour les vidéos sans exif
+- utilisation optimisée de Metadata
+
 [Version 1.5.1]
 2019_07_18
 
