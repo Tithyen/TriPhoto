@@ -22,6 +22,11 @@ public class Process {
 	private Consumer<Message> listener; //pour renvoyer des mémos
 	private Log log;
 	
+	/**
+	 * Constructeur
+	 * @param pListener un écouteur qui permet d'envoyer au thread GUI les informations
+	 * de déroulement du process
+	 */
 	public Process(Consumer<Message> pListener)  {	
 		this.listener = pListener;
 		run();
@@ -31,12 +36,13 @@ public class Process {
 			
 			//on instancie un objet log
 			log = new Log();
-			
+			//on envoi l'info de début de traitement au GUI
 			this.listener.accept(new Message(DateHeure.getDateHeure(false) + "DEBUT du tri " +  "\n\n", 
 					Type.Memo, Message.Level.NORMAL));
 			//entrée du log pour debug
 			log.ajouter("Chemin du dossier de tri : " + Parametres.getValeur("chemin.dossierATrier"),
-					Message.Level.DEBUG);		
+					Message.Level.DEBUG);	
+			
 			//On récupere la liste des fichiers du repertoire dossierATrier
 			ListerRepertoire lr = new ListerRepertoire(Parametres.getValeur("chemin.dossierATrier"),
 					Parametres.getValeur("chemin.choix.sousRepertoire"));
@@ -46,13 +52,15 @@ public class Process {
 			List<Fichier> listeFichiers = new ArrayList<Fichier>();
 			//on definit le max de la progressBar
 			this.listener.accept(new Message(lf.size(), Type.Max, null));
+			//on ajouter à la variable listeFichiers les objets Fichiers créés 
+			//à partie de lf
 			int i = 0;
 			for (File f : lf) {
-				Fichier fi = new Fichier(f.getPath());
-				listeFichiers.add(fi);
+				listeFichiers.add(new Fichier(f.getPath()));
 				//on met a jour la progressBar
 				listener.accept(new Message(i++, Type.Progression, null));
 			}
+			
 			//on envoie le nombre de fichier au GUI pour la JprogressBar par l'intermédiaire
 			//d'un Message
 			this.listener.accept(new Message(lf.size(), Type.Max, null));
@@ -79,7 +87,6 @@ public class Process {
 			}	
 			
 			//inscription fin d'opération au log
-
 			this.listener.accept(new Message("\n" + DateHeure.getDateHeure(false) + "FIN du tri" + "\n",
 					Type.Memo, Message.Level.NORMAL));
 			this.listener.accept(new Message("\n\n", Type.Memo, Message.Level.NORMAL));
