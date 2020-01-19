@@ -34,9 +34,9 @@ public class Main {
 		
 		//On instancie la classe Log pour y inscrire une en-tête	
 		log = new Log();
-		log.ajouter("_______________________________________________________\n\n", Message.Level.NORMAL);
-		log.ajouter("TriPhoto du " + DateHeure.getDateHeure(true) + "\n\n", Message.Level.NORMAL);
-		log.ajouter("Log en mode " + Parametres.getValeur("log.level") + "\n\n", Message.Level.NORMAL);
+		log.ajouter("_______________________________________________________", Message.Level.NORMAL);
+		log.ajouter("TriPhoto du " + DateHeure.getDateHeure(true) + "\n", Message.Level.NORMAL);
+		log.ajouter("Log en mode " + Parametres.getValeur("log.level") + "\n", Message.Level.NORMAL);
 
 		
 		/* Si l'application est lancée par ligne de commande avec l'argument : 'lignecommande'

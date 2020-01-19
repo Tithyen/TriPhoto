@@ -90,7 +90,7 @@ public class Tri {
 		if (!pCible.getParentFile().exists()) {
 			pCible.getParentFile().mkdirs();
 			this.repertoireCree.add(pCible.getParentFile());
-			listener.accept(new Message("Création répertoire : " + pCible.getParentFile() + "\n",
+			listener.accept(new Message("Création répertoire : " + pCible.getParentFile(),
 					Type.Memo, Message.Level.NORMAL));
 		}
 		//on deplace le fichier
@@ -99,7 +99,7 @@ public class Tri {
 			Files.move(pSource.toPath(), pCible.toPath());
 			// on envoie l'info du traitement à l'ecouteur pour affichage eccran et log
 			listener.accept(new Message("Déplacement : " + pSource.getAbsolutePath() 
-							+ " --> " + pCible.getAbsolutePath() + "\n",
+							+ " --> " + pCible.getAbsolutePath(),
 							Type.Memo, Message.Level.NORMAL));
 			//pour la JpRogressBar
 			listener.accept(new Message(progress++, Type.Progression, null));

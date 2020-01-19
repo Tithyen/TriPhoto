@@ -37,7 +37,7 @@ public class Process {
 			//on instancie un objet log
 			log = new Log();
 			//on envoi l'info de début de traitement au GUI
-			this.listener.accept(new Message(DateHeure.getDateHeure(false) + "DEBUT du tri " +  "\n\n", 
+			this.listener.accept(new Message(DateHeure.getDateHeure(false) + " DEBUT du tri " +  "\n", 
 					Type.Memo, Message.Level.NORMAL));
 			//entrée du log pour debug
 			log.ajouter("Chemin du dossier de tri : " + Parametres.getValeur("chemin.dossierATrier"),
@@ -64,13 +64,13 @@ public class Process {
 			//on envoie le nombre de fichier au GUI pour la JprogressBar par l'intermédiaire
 			//d'un Message
 			this.listener.accept(new Message(lf.size(), Type.Max, null));
-			this.listener.accept(new Message("Nombre de fichiers à trier : " + lf.size() + "\n",
+			this.listener.accept(new Message("Nombre de fichiers à trier : " + lf.size(),
 					Type.Memo, Message.Level.NORMAL));
 			if (lf.size() != 0) {
 				for (TypeFichier t : TypeFichier.values()) {
 					this.listener.accept(new Message(
 							"    * dont : " + CompteTypeFichier(listeFichiers, t) 
-							+ " " + t + "(s)" + "\n",
+							+ " " + t + "(s)",
 							Type.Memo, Message.Level.NORMAL));
 				}
 				this.listener.accept(new Message("\n", Type.Memo, Message.Level.NORMAL));
@@ -87,10 +87,8 @@ public class Process {
 			}	
 			
 			//inscription fin d'opération au log
-			this.listener.accept(new Message("\n" + DateHeure.getDateHeure(false) + "FIN du tri" + "\n",
+			this.listener.accept(new Message("\n" + DateHeure.getDateHeure(false) + " FIN du tri",
 					Type.Memo, Message.Level.NORMAL));
-			this.listener.accept(new Message("\n\n", Type.Memo, Message.Level.NORMAL));
-			
 		}
 		
 		private static int CompteTypeFichier(List<Fichier> pListe, TypeFichier pTypeFichier) {

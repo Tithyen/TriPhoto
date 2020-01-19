@@ -37,7 +37,7 @@ public class Memo extends JTextArea {
 			}
 		}
 		if (argLevel.getDegre() <= levelGlobal.getDegre()) { 
-			this.append(argMessage);
+			this.append(argMessage + "\n");
 		}
 	}
 }
