@@ -26,3 +26,6 @@ BugFix:
 
 Version initiale de l'application avec fonctionnement à la fois en GUI et ligne de commande
 
+[en cours]
+2020_01 : ajout de barres verticales et horysontales dans le menu Settings si la fenêtre est trop petite
+2020_01 : Définition d'une taille mini pour l'application

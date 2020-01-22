@@ -8,6 +8,7 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
@@ -66,8 +67,14 @@ public class FenetrePrincipale extends JFrame  {
 		
 		log = new Log();
 		this.setTitle("Tri photos et videos");
-		this.setSize(1100, 900);
-		this.setMinimumSize(new Dimension(800,600));
+		//on récupere la taille de l'écran pour définir la taille de l'application
+		//Toolkit tk = Toolkit.getDefaultToolkit();
+		//Dimension d = tk.getScreenSize();
+		//int hauteurEcran = d.height;
+		//int largeurEcran = d.width;
+		//this.setSize(largeurEcran/2, hauteurEcran/2);
+		this.setSize(1200, 900);
+		this.setMinimumSize(new Dimension(900,600));
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		//On ajouter un événement fermeture de la fenetre
@@ -111,7 +118,7 @@ public class FenetrePrincipale extends JFrame  {
 			panelWest.add(bouton);	
 		}
 		
-		//Affichafe de la VERSION
+		//Affichage de la VERSION
 		//creation du textarea intermediaire
 		JTextArea tampon = new JTextArea();
 		tampon.setBackground(Couleurs.MENU_DEFAUT.getCouleur());
@@ -241,13 +248,15 @@ public class FenetrePrincipale extends JFrame  {
 		panelTri.add(areaScrollPane, BorderLayout.CENTER);
 		panelTri.add(panelTriSud, BorderLayout.SOUTH);
 		
-		//settings
+		//SETTINGS
+		//on définit un JscrollPane pour avoir un jpanel scrollable
 		//on affecte à ce panel un layout de type border layout pour y placer 
 		//les différents éléments voulus
+		JScrollPane scrollPane = new JScrollPane();
 		JPanel panelSettings = new JPanel();
 		panelSettings.setBackground(Couleurs.PANEL_DEFAUT.getCouleur());
 		panelSettings.setLayout(new BorderLayout());
-		
+		scrollPane.setViewportView(panelSettings);
 		//on cree un panel north
 		JPanel panelSettingsNorth = new JPanel();
 		panelSettingsNorth.setBackground(Couleurs.PANEL_CLAIR.getCouleur());
@@ -266,7 +275,7 @@ public class FenetrePrincipale extends JFrame  {
 		
 		//panelCentre.add(panelAccueil, menu[0]);
 		panelCentre.add(panelTri, menu[0]);
-		panelCentre.add(panelSettings, menu[1]);
+		panelCentre.add(scrollPane, menu[1]);
 		
 		//par defaut on affiche le panel Accueil
 		//on sélectionne le bouton menu correspondant
